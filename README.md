@@ -1,0 +1,2 @@
+# etc-nixos
+nixos configuration
