@@ -9,6 +9,9 @@
       ./hardware-configuration.nix
     ];
 
+  hardware.bluetooth.enable = true;
+  hardware.pulseaudio.package = pkgs.pulseaudioFull;
+
   boot.kernelPackages = pkgs.linuxPackages_latest;
 
   boot.initrd.luks.devices = [
@@ -27,7 +30,7 @@
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.devices = [ "/dev/sda" "/dev/sdb" ]; # or "nodev" for efi only
 
-  boot.loader.grub.extraPerEntryConfig = "acpi=force";
+  # boot.loader.grub.extraPerEntryConfig = "acpi=force";
 
   boot.initrd.mdadmConf = ''
     DEVICE /dev/sda1 /dev/sdb1
@@ -53,8 +56,9 @@
   # ];
 
   networking.hostName = "n1";
-  networking.wireless.enable = true;
-  networking.wireless.userControlled.enable = true;
+  #networking.wireless.enable = true;
+  #networking.wireless.userControlled.enable = true;
+  networking.networkmanager.enable = true;
 
   # List services that you want to enable:
 
@@ -75,7 +79,7 @@
   services.xserver.layout = "us";
   # services.xserver.xkbOptions = "eurosign:e";
 
-  # services.xserver.synaptics.enable = true;
+  services.xserver.synaptics.enable = true;
 
   # Enable the KDE Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
@@ -91,4 +95,6 @@
   # The NixOS release to be compatible with for stateful data such as databases.
   system.stateVersion = "17.03";
 
+  programs.java.enable = true;
+  
 }
