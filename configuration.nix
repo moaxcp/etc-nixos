@@ -104,6 +104,11 @@
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 
+  networking.nat.enable = true;
+  networking.nat.internalInterfaces = [ "ve-+" ];
+  networking.nat.externalInterface = "wlp3s0";
+  networking.networkmanager.unmanaged = [ "interface-name:ve-*" ];
+
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
@@ -129,5 +134,8 @@
   system.stateVersion = "17.03";
 
   programs.java.enable = true;
-  
+  programs.bash = {
+    enableCompletion = true;
+    
+  };  
 }
