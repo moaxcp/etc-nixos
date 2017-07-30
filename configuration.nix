@@ -20,6 +20,11 @@
       device = "/dev/md/1";
       preLVM = true;
     }
+    {
+      name = "data";
+      device = "/dev/sdc";
+      preLVM = true;
+    }
   ];
   # Use the GRUB 2 boot loader.
   boot.loader.grub.enable = true;
@@ -39,6 +44,12 @@
     ARRAY /dev/md/1 metadata=1.2 UUID=70e06d78:4e14590a:a4e13279:9e6e387f name=g1:1
   '';
 
+  fileSystems."/data" = {
+    device = "/dev/disk/by-uuid/0e9d6f15-288d-4071-8cd0-4c8437450938";
+    fsType = "ext4";
+    options = [ "nofail" ];
+  };
+
   # Select internationalisation properties.
   i18n = {
     consoleFont = "Lat2-Terminus16";
@@ -51,9 +62,9 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-  # environment.systemPackages = with pkgs; [
-  #   wget
-  # ];
+   environment.systemPackages = with pkgs; [
+    obnam
+  ];
 
   networking.hostName = "n1";
   #networking.wireless.enable = true;
@@ -64,6 +75,28 @@
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
+  services.openssh.permitRootLogin = "yes";
+
+  services.fcron = {
+    enable = true;
+    allow = [ "john" ];
+    systab = ''
+      @ 1d obnam backup
+    '';
+  };
+
+  environment.etc."obnam.conf" = {
+    enable = true;
+    text = ''
+      [config]
+      repository = /data/obnam/all
+      client-name = n1
+      log = /data/obnam/all.log
+      root = /
+      one-file-system = yes
+      exclude = /data
+    '';
+  };
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
