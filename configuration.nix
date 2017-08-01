@@ -57,7 +57,7 @@
     defaultLocale = "en_US.UTF-8";
   };
 
-  fonts.fonts = with pkgs; [ terminus_font ];
+  fonts.fonts = with pkgs; [ terminus_font terminus_font_ttf ];
   fonts.enableDefaultFonts = true;
 
   # Set your time zone.
@@ -67,8 +67,6 @@
   # $ nix-env -qaP | grep wget
    environment.systemPackages = with pkgs; [
     obnam
-    terminus_font
-    terminus_font_ttf
   ];
 
   networking.hostName = "n1";
