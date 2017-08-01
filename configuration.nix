@@ -82,12 +82,18 @@
   services.openssh.enable = true;
   services.openssh.permitRootLogin = "yes";
 
-  services.fcron = {
-    enable = true;
-    allow = [ "john" ];
-    systab = ''
-      @ 1d obnam backup
-    '';
+  systemd.services.obnam = {
+    description = "Perform system backup";
+    script = "obnam backup";
+  };
+
+  systemd.timers.obnam = {
+    description = "run obnam every day";
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+    };
   };
 
   environment.etc."obnam.conf" = {
@@ -129,7 +135,7 @@
   services.xserver.desktopManager.plasma5.enable = true;
   services.xserver.displayManager.sessionCommands = 
     lib.mkIf config.services.xserver.enable ''
-      '${pkgs.xorg.xrdb}/bin/xrdb' -load ${./Xresources}
+      '${pkgs.xorg.xrdb}/bin/xrdb' -load '${./Xresources}'
     '';
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
