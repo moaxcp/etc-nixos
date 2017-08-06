@@ -67,6 +67,7 @@
   # $ nix-env -qaP | grep wget
    environment.systemPackages = with pkgs; [
     obnam
+    dropbox
   ];
 
   networking.hostName = "n1";
@@ -81,8 +82,8 @@
   services.openssh.permitRootLogin = "yes";
 
   systemd.services.obnam = {
-    description = "Perform system backup";
-    script = "${pkgs.obnam}/bin/obnam backup";
+    description = "system backup with obnam";
+    script = "PATH=${pkgs.obnam}/bin:${pkgs.coreutils}/bin ${pkgs.stdenv.shell} ${./obnam.sh}";
   };
 
   systemd.timers.obnam = {
@@ -100,7 +101,6 @@
       [config]
       repository = /data/obnam/all
       client-name = n1
-      log = /data/obnam/all.log
       root = /
       one-file-system = yes
       exclude = /data
@@ -111,7 +111,7 @@
   # networking.firewall.allowedTCPPorts = [ ... ];
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
+  networking.firewall.enable = false;
 
   networking.nat.enable = true;
   networking.nat.internalInterfaces = [ "ve-+" ];
@@ -187,5 +187,10 @@
       shopt -s histappend
       export PROMPT_COMMAND="history -a; history -c; history -r; set_prompt; $PROMPT_COMMAND"
     '';
+  };
+
+
+  nixpkgs.config = {
+    allowUnfree = true;
   };
 }
