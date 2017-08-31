@@ -68,6 +68,30 @@
    environment.systemPackages = with pkgs; [
     obnam
     dropbox
+    networkmanagerapplet
+    curl
+    htop
+    lsof
+    psmisc
+    pwgen
+    tmux
+    screen
+    tree
+    unzip
+    zip
+    utillinux
+    vim
+    lynx
+    git
+    gitAndTools.gitflow
+    
+    chromium
+    firefox
+    i3 i3lock i3status dmenu
+    inkscape
+    keepassx2
+    libreoffice
+    xfontsel
   ];
 
   networking.hostName = "n1";
@@ -121,26 +145,25 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-  services.xserver.layout = "us";
-  # services.xserver.xkbOptions = "eurosign:e";
-
-  services.xserver.synaptics.enable = true;
-
-  # Enable the KDE Desktop Environment.
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
-  services.xserver.displayManager.sessionCommands = 
-    lib.mkIf config.services.xserver.enable ''
-      '${pkgs.xorg.xrdb}/bin/xrdb' -load '${./Xresources}'
+  services.xserver = {
+    enable = true;
+    layout = "us";
+    synaptics.enable = true;
+    displayManager.slim.enable = true;
+    windowManager.i3.enable = true;
+    windowManager.default = "i3";
+    displayManager.sessionCommands = ''
+      ${pkgs.xorg.xrdb}/bin/xrdb -merge ${./Xresources}
+      ${pkgs.networkmanagerapplet}/bin/nm-applet &
     '';
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.extraUsers.john = {
     isNormalUser = true;
     uid = 1000;
     extraGroups = [ "wheel" "networkmanager" ];
+    shell = pkgs.fish;
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
@@ -188,7 +211,7 @@
       export PROMPT_COMMAND="history -a; history -c; history -r; set_prompt; $PROMPT_COMMAND"
     '';
   };
-
+  programs.fish.enable = true;
 
   nixpkgs.config = {
     allowUnfree = true;
