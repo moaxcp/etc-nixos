@@ -84,6 +84,7 @@
     lynx
     git
     gitAndTools.gitflow
+    irssi
     
     chromium
     firefox
@@ -150,12 +151,11 @@
     layout = "us";
     synaptics.enable = true;
     displayManager.slim.enable = true;
-    windowManager.i3.enable = true;
-    windowManager.default = "i3";
     displayManager.sessionCommands = ''
       ${pkgs.xorg.xrdb}/bin/xrdb -merge ${./Xresources}
       ${pkgs.networkmanagerapplet}/bin/nm-applet &
     '';
+    desktopManager.xfce.enable = true;
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
