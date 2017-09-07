@@ -84,11 +84,12 @@
     lynx
     git
     gitAndTools.gitflow
+    stalonetray
     irssi
     
     chromium
     firefox
-    i3 i3lock i3status dmenu
+ 
     inkscape
     keepassx2
     libreoffice
@@ -153,9 +154,17 @@
     displayManager.slim.enable = true;
     displayManager.sessionCommands = ''
       ${pkgs.xorg.xrdb}/bin/xrdb -merge ${./Xresources}
+      ${pkgs.stalonetray}/bin/stalonetray --geometry 6x1 --no-shrink --kludges force_icons_size -i 24 &
       ${pkgs.networkmanagerapplet}/bin/nm-applet &
+      ${pkgs.dropbox}/bin/dropbox &
+      
     '';
-    desktopManager.xfce.enable = true;
+    windowManager.notion.enable = true;
+    desktopManager.xfce = {
+      enable = true;
+      enableXfwm = false;
+      noDesktop = true;
+    };
   };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
