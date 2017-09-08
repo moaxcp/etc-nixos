@@ -89,6 +89,8 @@
     
     chromium
     firefox
+
+    jetbrains.idea-community
  
     inkscape
     keepassx2
@@ -154,10 +156,9 @@
     displayManager.slim.enable = true;
     displayManager.sessionCommands = ''
       ${pkgs.xorg.xrdb}/bin/xrdb -merge ${./Xresources}
-      ${pkgs.stalonetray}/bin/stalonetray --geometry 6x1 --no-shrink --kludges force_icons_size -i 24 &
+      ${pkgs.stalonetray}/bin/stalonetray --parent-bg --kludges force_icons_size -i 24 &
       ${pkgs.networkmanagerapplet}/bin/nm-applet &
-      ${pkgs.dropbox}/bin/dropbox &
-      
+      ${pkgs.dropbox}/bin/dropbox &      
     '';
     windowManager.notion.enable = true;
     desktopManager.xfce = {
@@ -220,7 +221,9 @@
       export PROMPT_COMMAND="history -a; history -c; history -r; set_prompt; $PROMPT_COMMAND"
     '';
   };
-  programs.fish.enable = true;
+  programs.fish = {
+    enable = true;
+  };
 
   nixpkgs.config = {
     allowUnfree = true;
