@@ -7,6 +7,7 @@
 {
   imports = [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./user/john.nix
     ];
 
   hardware.bluetooth.enable = true;
@@ -67,8 +68,6 @@
   # $ nix-env -qaP | grep wget
    environment.systemPackages = with pkgs; [
     obnam
-    dropbox
-    networkmanagerapplet
     curl
     htop
     lsof
@@ -82,20 +81,6 @@
     utillinux
     vim
     lynx
-    git
-    gitAndTools.gitflow
-    stalonetray
-    irssi
-    
-    chromium
-    firefox
-
-    jetbrains.idea-community
- 
-    inkscape
-    keepassx2
-    libreoffice
-    xfontsel
   ];
 
   networking.hostName = "n1";
@@ -155,7 +140,6 @@
     synaptics.enable = true;
     displayManager.slim.enable = true;
     displayManager.sessionCommands = ''
-      ${pkgs.xorg.xrdb}/bin/xrdb -merge ${./Xresources}
       ${pkgs.stalonetray}/bin/stalonetray --parent-bg --kludges force_icons_size -i 24 &
       ${pkgs.networkmanagerapplet}/bin/nm-applet &
       ${pkgs.dropbox}/bin/dropbox &      
@@ -166,15 +150,6 @@
       enableXfwm = false;
       noDesktop = true;
     };
-  };
-
-  # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.extraUsers.john = {
-    isNormalUser = true;
-    uid = 1000;
-    home = "/etc/user/john";
-    extraGroups = [ "wheel" "networkmanager" ];
-    shell = pkgs.fish;
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
