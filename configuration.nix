@@ -172,6 +172,7 @@
   users.extraUsers.john = {
     isNormalUser = true;
     uid = 1000;
+    home = "/etc/user/john";
     extraGroups = [ "wheel" "networkmanager" ];
     shell = pkgs.fish;
   };
