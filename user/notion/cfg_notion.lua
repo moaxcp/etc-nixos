@@ -105,7 +105,7 @@ ioncore.set{
 -- The modules' configuration files correspond to the names of the
 -- modules with 'mod' replaced by 'cfg'.
 dopath("cfg_defaults")
-
+dopath("contrib/statusbar_wsname")
 -- Load configuration of the Notion 'core'. Most bindings are here.
 --dopath("cfg_notioncore")
 

@@ -81,6 +81,9 @@
     utillinux
     vim
     lynx
+    libnotify
+    xorg.appres
+    xfce.xfce4notifyd    
   ];
 
   networking.hostName = "n1";
