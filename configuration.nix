@@ -66,7 +66,9 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-   environment.systemPackages = with pkgs; [
+   environment.systemPackages = with pkgs; let pkgsUnstable = import (
+     fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz
+   ) { }; in [
     obnam
     curl
     htop
@@ -83,7 +85,8 @@
     lynx
     libnotify
     xorg.appres
-    xfce.xfce4notifyd    
+    xfce.xfce4notifyd
+    pkgsUnstable.notion
   ];
 
   networking.hostName = "n1";
