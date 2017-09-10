@@ -66,27 +66,53 @@
 
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
-   environment.systemPackages = with pkgs; let pkgsUnstable = import (
-     fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz
-   ) { }; in [
-    obnam
+   environment.systemPackages = with pkgs; [
+    chromium
     curl
+    dropbox
+    firefox
+    git
+    gitAndTools.gitflow
+    gnupg
+    groovy
     htop
+    inkscape
+    irssi
+    jetbrains.idea-community
+    libnotify
+    libreoffice
     lsof
+    lynx
+    networkmanagerapplet
+    nixops
+    notion
+    nox
+    nix-repl
+    obnam
+    openjdk
     psmisc
     pwgen
-    tmux
+    python
+    python3
+    python35Packages.youtube-dl
     screen
+    stalonetray
+    tmux
+    travis
     tree
     unzip
-    zip
     utillinux
     vim
-    lynx
-    libnotify
-    xorg.appres
+    virtualbox
+    visualvm
+    vlc
+    xbindkeys
     xfce.xfce4notifyd
-    pkgsUnstable.notion
+    xfontsel
+    xorg.appres
+    xorg.xev
+    xorg.xmodmap
+    zip
   ];
 
   networking.hostName = "n1";
@@ -209,5 +235,12 @@
 
   nixpkgs.config = {
     allowUnfree = true;
+    packageOverrides = let pkgsUnstable = import (
+      fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz
+    ) { }; in pkgs: 
+    rec {
+      visualvm = pkgsUnstable.visualvm;
+      notion = pkgsUnstable.notion;
+    };
   };
 }

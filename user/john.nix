@@ -9,21 +9,6 @@
     shell = pkgs.fish;
   };
 
-  environment.systemPackages = with pkgs; [
-    dropbox
-    networkmanagerapplet
-    git
-    gitAndTools.gitflow
-    stalonetray
-    irssi
-    chromium
-    firefox
-    jetbrains.idea-community
-    inkscape
-    libreoffice
-    xfontsel
-  ];
-
   environment.etc = {
     "user/john/.Xresources".source = ./Xresources;
     "user/john/.notion/cfg_notion.lua".source = ./notion/cfg_notion.lua;
