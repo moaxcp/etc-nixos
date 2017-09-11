@@ -7,6 +7,7 @@
 {
   imports = [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./package-upgrades.nix
       ./user/john.nix
     ];
 
@@ -233,14 +234,5 @@
     enable = true;
   };
 
-  nixpkgs.config = {
-    allowUnfree = true;
-    packageOverrides = let pkgsUnstable = import (
-      fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz
-    ) { }; in pkgs: 
-    rec {
-      visualvm = pkgsUnstable.visualvm;
-      notion = pkgsUnstable.notion;
-    };
-  };
+  nixpkgs.config.allowUnfree = true;
 }
