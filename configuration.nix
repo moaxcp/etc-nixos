@@ -111,6 +111,7 @@
     xfce.xfce4notifyd
     xfontsel
     xorg.appres
+    xorg.xclock
     xorg.xev
     xorg.xmodmap
     zip
