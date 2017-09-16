@@ -15,7 +15,7 @@
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModulePackages = [ pkgs.linuxPackages.nvidia_x11 ];
+  boot.extraModulePackages = [ pkgs.linuxPackages_latest.nvidia_x11 ];
 
   boot.initrd.luks.devices = [
     {
