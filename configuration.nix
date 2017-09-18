@@ -75,6 +75,7 @@
     firefox
     git
     gitAndTools.gitflow
+    gnome_mplayer
     gnupg
     groovy
     htop
@@ -85,6 +86,7 @@
     libreoffice
     lsof
     lynx
+    mplayer
     networkmanagerapplet
     nixops
     notion
