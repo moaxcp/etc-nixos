@@ -15,7 +15,10 @@
   hardware.pulseaudio.package = pkgs.pulseaudioFull;
 
   boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.extraModulePackages = [ pkgs.linuxPackages_latest.nvidia_x11 ];
+  #boot.extraModprobeConfig = "options nvidia-drm modeset=1";
+  #boot.initrd.kernelModules = [
+  #  "nvidia" "nvidia_modeset" "nvidia_uvm" "nvidia_drm"
+  #];
 
   boot.initrd.luks.devices = [
     {
@@ -187,6 +190,7 @@
       enableXfwm = false;
       noDesktop = true;
     };
+    #videoDrivers = [ "nvidia" ];
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
