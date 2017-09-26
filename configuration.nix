@@ -80,6 +80,7 @@
     gitAndTools.gitflow
     gnome_mplayer
     gnupg
+    gradle
     groovy
     htop
     inkscape
