@@ -98,6 +98,7 @@
     nix-repl
     obnam
     openjdk
+    pidgin
     psmisc
     pwgen
     python
