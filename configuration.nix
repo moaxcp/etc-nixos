@@ -76,6 +76,7 @@
     curl
     dropbox
     firefox
+    gnome3.gedit
     git
     gitAndTools.gitflow
     gnome_mplayer
