@@ -84,6 +84,8 @@
     gnome_mplayer
     gnupg
     gradle
+    grails
+    graphviz
     groovy
     htop
     inkscape
@@ -94,12 +96,16 @@
     lsof
     lynx
     mplayer
+    multimc
+    mysqlWorkbench
+    netbeans
     networkmanagerapplet
     nixops
     notion
     nox
     nix-repl
     obnam
+    obs-studio
     openjdk
     pidgin
     psmisc
@@ -107,6 +113,7 @@
     python
     python3
     python35Packages.youtube-dl
+    python36Packages.xdot
     screen
     stalonetray
     tmux
@@ -170,6 +177,11 @@
       noDesktop = true;
     };
     #videoDrivers = [ "nvidia" ];
+  };
+
+  services.mysql = {
+    enable = true;
+    package = pkgs.mysql57;
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
