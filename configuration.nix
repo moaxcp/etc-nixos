@@ -106,7 +106,6 @@
     nix-repl
     obnam
     obs-studio
-    openjdk
     pidgin
     psmisc
     pwgen
@@ -188,6 +187,7 @@
   system.stateVersion = "17.09";
 
   programs.java.enable = true;
+  programs.java.package = pkgs.oraclejdk8;
 
   programs.fish = {
     enable = true;

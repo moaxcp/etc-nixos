@@ -2,7 +2,7 @@
   <settings defaultResolver="downloadGrapes"/>
   <resolvers>
     <chain name="downloadGrapes" returnFirst="true">
-      <filesystem name="local-maven2" checkmodified="true" changingPattern=".*" changingMatcher="regexp" m2compatible="true" cache="nocache">
+      <filesystem name="local-maven2" checkmodified="true" changingPattern=".*" changingMatcher="regexp" m2compatible="true">
         <artifact pattern="${user.home}/.m2/repository/[organisation]/[module]/[revision]/[module]-[revision](-[classifier]).[ext]"/>
         <ivy pattern="${user.home}/.m2/repository/[organisation]/[module]/[revision]/[module]-[revision](-[classifier]).pom"/>
       </filesystem>
