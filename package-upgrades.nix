@@ -14,15 +14,7 @@
     
     in pkgs:
     rec {
-      gradle =
-        if pkgs.gradle.name == "gradle-4.2" then
-          abort pkgs.gradle.name + " was found in pkgs. No need to upgrade."
-        else if pkgsUnstable.gradle.name == "gradle-4.2" then
-          pkgsUnstable.gradle
-        else if pkgsLocal.gradle.name == "gradle-4.2" then
-          pkgsLocal.gradle
-        else
-          abort "could not find gradle-4.2";
+        jbake = pkgsLocal.jbake;                
     };
   };
 }

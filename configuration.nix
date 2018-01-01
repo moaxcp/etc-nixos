@@ -7,7 +7,7 @@
 {
   imports = [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./package-upgrades.nix
+      #./package-upgrades.nix
       ./obnam.nix
       ./bash.nix
       ./user/john.nix
@@ -74,6 +74,7 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
    environment.systemPackages = with pkgs; [
+    ant
     chromium
     curl
     dropbox
