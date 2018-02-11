@@ -14,7 +14,8 @@
     
     in pkgs:
     rec {
-        jbake = pkgsLocal.jbake;                
+        jbake = pkgsUnstable.jbake;
+        dropbox = pkgsUnstable.dropbox;                
     };
   };
 }
