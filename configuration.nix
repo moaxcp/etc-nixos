@@ -116,6 +116,7 @@
     python36Packages.xdot
     screen
     stalonetray
+    tdesktop
     tmux
     travis
     tree
@@ -158,7 +159,15 @@
   networking.networkmanager.unmanaged = [ "interface-name:ve-*" ];
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+  services.printing = {
+    enable = true;
+    drivers = [ pkgs.epson-escpr ];
+  };
+
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+  };
 
   services.xserver = {
     enable = true;
