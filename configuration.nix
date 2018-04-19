@@ -7,7 +7,6 @@
 {
   imports = [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      #./package-upgrades.nix
       ./obnam.nix
       ./bash.nix
       ./user/john.nix
@@ -78,6 +77,7 @@
     chromium
     curl
     dropbox
+    dosbox
     firefox
     gnome3.gedit
     git
@@ -91,6 +91,7 @@
     htop
     inkscape
     irssi
+    jbake
     jetbrains.idea-community
     libnotify
     libreoffice
@@ -194,7 +195,7 @@
   };
 
   # The NixOS release to be compatible with for stateful data such as databases.
-  system.stateVersion = "17.09";
+  system.stateVersion = "18.03";
 
   programs.java.enable = true;
   programs.java.package = pkgs.oraclejdk8;
@@ -204,4 +205,6 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+
+  nixpkgs.overlays = [ (import ./nixos-overlay) ];
 }

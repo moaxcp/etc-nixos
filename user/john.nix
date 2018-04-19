@@ -1,11 +1,13 @@
 { config, pkgs, ... }:
 
 {
+  users.extraGroups.john.gid = 1000;
   users.extraUsers.john = {
     isNormalUser = true;
     uid = 1000;
-    home = "/etc/user/john";
-    extraGroups = [ "wheel" "networkmanager" ];
+    home = "/home/john";
+    group = "john";
+    extraGroups = [ "users" "wheel" "networkmanager" ];
     shell = pkgs.fish;
   };
 
