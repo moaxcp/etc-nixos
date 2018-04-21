@@ -12,5 +12,11 @@ in {
         url = "https://dl.bintray.com/jbake/binary/${name}-bin.zip";
         sha256 = "0zlh2azmv8gj3c4d4ndivar31wd42nmvhxq6xhn09cib9kffxbc7";
     };
+
+    installPhase = ''
+      mkdir -p $out
+      cp -vr * $out
+      wrapProgram $out/bin/jbake --set JAVA_HOME "${jre}"
+    '';
   });
 }
