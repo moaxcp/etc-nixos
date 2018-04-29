@@ -1,22 +1,9 @@
 self: super:
 let
-  pkgsUnstable = import (
-    fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz
-  ) { };
+  pkgsUnstable = import <nixpkgs-unstable> { };
   inherit (self) fetchzip;
+  //for pkgsUnstable make function to compare versions and fail if pkgsUnstable version matches.
 in {
-  jbake = super.jbake.overrideAttrs (old: rec {
-    version = "2.6.1";
-    name = "jbake-${version}";
-    src = fetchzip {
-        url = "https://dl.bintray.com/jbake/binary/${name}-bin.zip";
-        sha256 = "0zlh2azmv8gj3c4d4ndivar31wd42nmvhxq6xhn09cib9kffxbc7";
-    };
-
-    installPhase = ''
-      mkdir -p $out
-      cp -vr * $out
-      wrapProgram $out/bin/jbake --set JAVA_HOME "${jre}"
-    '';
-  });
+  visualvm = pkgsUnstable.visualvm;
+  jbake = pkgsUnstable.jbake;
 }

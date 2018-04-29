@@ -3,7 +3,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, lib, pkgs, ... }:
-
+let
+  unstable = import (fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz) {};
+in
 {
   imports = [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -73,6 +75,7 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
    environment.systemPackages = with pkgs; [
+
     ant
     chromium
     curl
@@ -92,7 +95,6 @@
     inkscape
     irssi
     jbake
-    jetbrains.idea-community
     libnotify
     libreoffice
     lsof
@@ -198,13 +200,15 @@
   system.stateVersion = "18.03";
 
   programs.java.enable = true;
-  programs.java.package = pkgs.oraclejdk8;
+  programs.java.package = pkgs.jdk9;
 
   programs.fish = {
     enable = true;
   };
 
   nixpkgs.config.allowUnfree = true;
-
-  nixpkgs.overlays = [ (import ./nixos-overlay) ];
+  nixpkgs.overlays = [ (self: super: {
+    jbake = unstable.jbake;
+    visualvm = unstable.visualvm;
+  })];
 }
