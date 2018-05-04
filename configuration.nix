@@ -3,9 +3,7 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, lib, pkgs, ... }:
-let
-  unstable = import (fetchTarball https://github.com/NixOS/nixpkgs-channels/archive/nixos-unstable.tar.gz) {};
-in
+
 {
   imports = [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
@@ -75,68 +73,10 @@ in
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
    environment.systemPackages = with pkgs; [
-
-    ant
-    chromium
-    curl
-    dropbox
-    dosbox
-    firefox
-    gnome3.gedit
     git
-    gitAndTools.gitflow
-    gnome_mplayer
-    gnupg
-    gradle
-    grails
-    graphviz
-    groovy
-    htop
-    inkscape
-    irssi
-    jbake
-    libnotify
-    libreoffice
-    lsof
-    lynx
-    mplayer
-    multimc
-    mysqlWorkbench
-    netbeans
     networkmanagerapplet
-    nixops
-    notion
-    nox
-    nix-repl
-    obnam
-    obs-studio
-    pidgin
-    psmisc
-    pwgen
-    python
-    python3
-    python35Packages.youtube-dl
-    python36Packages.xdot
-    screen
     stalonetray
-    tdesktop
-    tmux
-    travis
-    tree
-    unzip
-    utillinux
-    vim
-    virtualbox
-    visualvm
-    vlc
-    xbindkeys
     xfce.xfce4notifyd
-    xfontsel
-    xorg.appres
-    xorg.xclock
-    xorg.xev
-    xorg.xmodmap
-    zip
   ];
 
   networking.hostName = "n1";
@@ -207,8 +147,4 @@ in
   };
 
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.overlays = [ (self: super: {
-    jbake = unstable.jbake;
-    visualvm = unstable.visualvm;
-  })];
 }
