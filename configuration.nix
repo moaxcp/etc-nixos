@@ -7,7 +7,7 @@
 {
   imports = [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./obnam.nix
+      ./borg.nix
       ./bash.nix
       ./user/john.nix
     ];
@@ -73,6 +73,7 @@
   # List packages installed in system profile. To search by name, run:
   # $ nix-env -qaP | grep wget
    environment.systemPackages = with pkgs; [
+    borgbackup
     git
     networkmanagerapplet
     stalonetray
