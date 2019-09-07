@@ -13,19 +13,17 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/5e73c600-a2af-4ede-8104-c878ac009385";
+    { device = "/dev/disk/by-uuid/e5f3a09d-02d9-42bd-ade1-e42afae72eca";
       fsType = "ext4";
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/19fdb4ed-815e-4757-8e82-4a9ea34fa28e";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/0c843042-7045-4503-90ba-c24f4cc90fad";
+      fsType = "ext2";
     };
 
-  swapDevices =
-    [ { device = "/dev/disk/by-uuid/6703aa16-77a2-4090-8c1c-573ceda2b853"; }
-    ];
+  swapDevices = [ ];
 
   nix.maxJobs = lib.mkDefault 8;
-  powerManagement.cpuFreqGovernor = "powersave";
+  powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";
 }
