@@ -53,8 +53,9 @@
     tree
     unzip
     utillinux
-    vim
     virtualbox
+    #vim config
+    (pkgs.callPackages ./vim.nix {})
     visualvm
     vlc
     wget
