@@ -1,12 +1,8 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, ... }:
 
 {
   nixpkgs.config.packageOverrides = pkgs: {
-    nur = import (builtins.fetchTarball "https://github.com/nix-community/NUR/archive/master.tar.gz") {
+    nur = import <nur> {
       inherit pkgs;
     };
   };
@@ -16,6 +12,7 @@
       ./hardware-configuration.nix
       ./boot.nix
       ./networking.nix
+      <home-manager/nixos>
       ./user.nix
       ./packages.nix
       ./services.nix
@@ -48,7 +45,7 @@
     nvidiaBusId = "PCI:1:0:0";
   };
 
-  services.xserver.videoDrivers = ["nvidiaLegacy390"];
+  services.xserver.videoDrivers = [ "nvidiaLegacy390" ];
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
@@ -61,5 +58,5 @@
   # compatible, in order to avoid breaking some software such as database
   # servers. You should change this only after NixOS release notes say you
   # should.
-  system.stateVersion = "19.03"; # Did you read the comment?
+  system.stateVersion = "19.09"; # Did you read the comment?
 }

@@ -8,4 +8,10 @@
     group = "john";
     extraGroups = [ "users" "wheel" "networkmanager" ];
   };
+  home-manager.users.john = { pkgs, ... }: {
+    home.packages = with pkgs; [
+      jetbrains.idea-community
+    ];
+    programs.bash.enable = true;
+  };
 }

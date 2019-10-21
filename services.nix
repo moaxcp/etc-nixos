@@ -17,6 +17,8 @@
     nssmdns = true;
   };
 
+  services.ntp.enable = true;
+
   services.xserver = {
     enable = true;
     layout = "us";

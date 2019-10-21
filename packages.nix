@@ -1,16 +1,18 @@
 {pkgs, ...}:
-{
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
+let
+  unstable = import <nixpkgs> {};
+in {
   environment.systemPackages = with pkgs; [
     adoptopenjdk-bin
     ant
-    bats
+    bat
     borgbackup
+    cachix
     chromium
     curl
     dropbox-cli
     git
+    glxinfo
     gnome_mplayer
     gnupg
     gradle
@@ -21,6 +23,7 @@
     irssi
     jbake
     jetbrains.idea-community
+    unstable.jmeter
     libdvdcss
     libdvdnav
     libdvdread
@@ -28,6 +31,8 @@
     libreoffice
     lsof
     lynx
+    nur.repos.moaxcp.micronaut
+    minecraft
     mkpasswd
     mplayer
     multimc
@@ -47,11 +52,14 @@
     rxvt_unicode-with-plugins
     screen
     skypeforlinux
+    #unstable.spring-boot
     tdesktop
     tmux
     travis
     tree
+    unetbootin
     unzip
+    usbutils
     utillinux
     virtualbox
     #vim config
