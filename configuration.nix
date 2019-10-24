@@ -1,12 +1,6 @@
 { config, pkgs, ... }:
 
 {
-  nixpkgs.config.packageOverrides = pkgs: {
-    nur = import <nur> {
-      inherit pkgs;
-    };
-  };
-
   imports =
     [
       ./hardware-configuration.nix
@@ -51,8 +45,6 @@
   hardware.pulseaudio.enable = true;
 
   hardware.bluetooth.enable = true;
-
-  nixpkgs.config.allowUnfree = true;
 
   # This value determines the NixOS release with which your system is to be
   # compatible, in order to avoid breaking some software such as database

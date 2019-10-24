@@ -1,7 +1,17 @@
-{pkgs, ...}:
-let
-  unstable = import <nixpkgs> {};
-in {
+{config, pkgs, ...}:
+{
+  nixpkgs.config = {
+    allowUnfree = true;
+    packageOverrides = pkgs: {
+      unstable = import <nixpkgs> {
+        config = config.nixpkgs.config;
+      };
+      nur = import <nur> {
+        inherit pkgs;
+      };
+    };
+  };
+
   environment.systemPackages = with pkgs; [
     adoptopenjdk-bin
     ant
@@ -22,8 +32,7 @@ in {
     inkscape
     irssi
     jbake
-    jetbrains.idea-community
-    unstable.jmeter
+    unstable.jetbrains.idea-community
     libdvdcss
     libdvdnav
     libdvdread
