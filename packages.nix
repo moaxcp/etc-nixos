@@ -3,7 +3,7 @@
   nixpkgs.config = {
     allowUnfree = true;
     packageOverrides = pkgs: {
-      unstable = import <nixpkgs> {
+      unstable = import <nixos-unstable> {
         config = config.nixpkgs.config;
       };
       nur = import <nur> {
@@ -13,10 +13,28 @@
   };
 
   environment.systemPackages = with pkgs; [
+    borgbackup
+    glxinfo
+    git
+    htop
+    unstable.jetbrains.idea-community
+    lsof
+    nixops
+    nox
+    psmisc
+    tree
+    unetbootin
+    unzip
+    usbutils
+    utillinux
+    #vim config
+    (pkgs.callPackages ./vim.nix {})
+    zip
+/*
+    # user packages
     adoptopenjdk-bin
     ant
     bat
-    borgbackup
     cachix
     chromium
     curl
@@ -28,9 +46,6 @@
     gradle
     graphviz
     groovy
-    htop
-    inkscape
-    irssi
     jbake
     unstable.jetbrains.idea-community
     libdvdcss
@@ -38,41 +53,24 @@
     libdvdread
     libnotify
     libreoffice
-    lsof
     lynx
     nur.repos.moaxcp.micronaut
     minecraft
     mkpasswd
     mplayer
     multimc
-    mysqlWorkbench
     netbeans
     networkmanagerapplet
-    nixops
-    nox
     obs-studio
-    pidgin
-    psmisc
-    pwgen
     python
     python3
     python35Packages.youtube-dl
     python36Packages.xdot
-    rxvt_unicode-with-plugins
     screen
     skypeforlinux
-    #unstable.spring-boot
     tdesktop
-    tmux
     travis
-    tree
-    unetbootin
-    unzip
-    usbutils
-    utillinux
     virtualbox
-    #vim config
-    (pkgs.callPackages ./vim.nix {})
     visualvm
     vlc
     wget
@@ -84,6 +82,6 @@
     xorg.xev
     xorg.xmodmap
     xterm
-    zip
+    */
   ];
 }

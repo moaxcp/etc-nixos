@@ -43,7 +43,9 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
-
+  hardware.pulseaudio.support32Bit = true;
+  nixpkgs.config.pulseautdio = true;
+  
   hardware.bluetooth.enable = true;
 
   # This value determines the NixOS release with which your system is to be
