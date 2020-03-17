@@ -9,14 +9,17 @@
     extraGroups = [ "users" "wheel" "networkmanager" "audio" ];
   };
   
-  home-manager.users.john = { config, pkgs, ... }: {
-    services.lorri.enable = true;
+  home-manager.users.john = { config, pkgs, ... }:
+  let
+    unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
+    nur = import <nur> { inherit pkgs; };
+  in {
+    nixpkgs.overlays = [
+      nur.repos.moaxcp.overlays.use-adoptopenjdk11
+    ];
     nixpkgs.config.allowUnfree = true;
-    home.packages = let
-        unstable = import <nixos-unstable> {config = config.nixpkgs.config; };
-        nur = import <nur> { inherit pkgs; };
-      in with pkgs; [
-      adoptopenjdk-bin
+    home.packages = with pkgs; [
+      nur.repos.moaxcp.adoptopenjdk-hotspot-bin-14-nightly
       ant
       bat
       cachix
@@ -40,13 +43,14 @@
       libnotify
       libreoffice
       lynx
-      nur.repos.moaxcp.micronaut
+      nur.repos.moaxcp.micronaut-1_3_3
       unstable.minecraft
       mkpasswd
       mplayer
       multimc
       netbeans
       networkmanagerapplet
+      unstable.niv
       obs-studio
       python
       python3
@@ -69,7 +73,27 @@
       xorg.xmodmap
       xterm
     ];
-    programs.bash.enable = true;
+    services.lorri.enable = true;
+
+    programs.bash = {
+      enable = true;
+      historyControl = ["ignoredups" "erasedups" ];
+      historyFileSize = 100000;
+      historySize = 10000;
+      shellOptions = [ "histappend" ];
+      initExtra = ''
+        #change PS1 to use colors and optimize space used. PS1 will show status of previous command.
+        set_prompt () {
+          if [[ "$?" == 0 ]]; then
+            PS1=""
+          else
+            PS1="\[\e[01;31m\]($?) "
+          fi
+          PS1+="\[\e[01;;34m\]\\\$\[\e[00m\] "
+        }
+        export PROMPT_COMMAND="set_prompt; history -a; history -c; history -r;"
+        eval "$(direnv hook bash)"
+      '';
+    };
   };
-  
-}
+
