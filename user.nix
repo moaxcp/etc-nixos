@@ -6,25 +6,31 @@
     uid = 1000;
     home = "/home/john";
     group = "john";
-    extraGroups = [ "users" "wheel" "networkmanager" "audio" ];
+    extraGroups = [ "users" "wheel" "networkmanager" "audio" "docker" ];
   };
   
   home-manager.users.john = { config, pkgs, ... }:
   let
     unstable = import <nixos-unstable> { config = config.nixpkgs.config; };
-    nur = import <nur> { inherit pkgs; };
+    nur = import <nur> {
+      inherit pkgs;
+    };
   in {
     nixpkgs.overlays = [
-      nur.repos.moaxcp.overlays.use-adoptopenjdk11
+      (self : super: {
+        micronaut-1_3_4 = nur.repos.moaxcp.micronaut-1_3_4;
+      })
+      nur.repos.moaxcp.overlays.use-adoptopenjdk11 
     ];
     nixpkgs.config.allowUnfree = true;
     home.packages = with pkgs; [
-      nur.repos.moaxcp.adoptopenjdk-hotspot-bin-14-nightly
+      #nur.repos.moaxcp.adoptopenjdk-hotspot-bin-14
       ant
       bat
       cachix
       chromium
       curl
+      docker
       dropbox-cli
       direnv
       gimp
@@ -36,14 +42,16 @@
       graphviz
       groovy
       jbake
+      jdk
       unstable.jetbrains.idea-community
+      jetbrains.pycharm-community
       libdvdcss
       libdvdnav
       libdvdread
       libnotify
       libreoffice
       lynx
-      nur.repos.moaxcp.micronaut-1_3_3
+      micronaut-1_3_4
       unstable.minecraft
       mkpasswd
       mplayer
@@ -52,8 +60,8 @@
       networkmanagerapplet
       unstable.niv
       obs-studio
-      python
       python3
+      python37Packages.pip
       python35Packages.youtube-dl
       python36Packages.xdot
       screen
@@ -96,4 +104,4 @@
       '';
     };
   };
-
+}
