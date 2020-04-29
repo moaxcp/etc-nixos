@@ -17,17 +17,19 @@
     glxinfo
     git
     htop
+    jdk
     lsof
     nixops
     nox
     psmisc
+    screen
     tree
     unetbootin
     unzip
     usbutils
     utillinux
     #vim config
-    (pkgs.callPackages ./vim.nix {})
+    (pkgs.callPackage ./vim.nix {})
     zip
   ];
 }

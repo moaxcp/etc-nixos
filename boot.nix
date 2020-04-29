@@ -9,18 +9,16 @@
   # Define on which hard drive you want to install Grub.
   boot.loader.grub.devices = ["/dev/sda" "/dev/sdb"]; # or "nodev" for efi only
 
-  boot.initrd.luks.devices = [
-    {
-      name = "root";
+  boot.initrd.luks.devices = {
+    root = {
       device = "/dev/md1";
       preLVM = true;
-    }
-    {
-      name = "data";
+    };
+    data = {
       device = "/dev/sdc";
       preLVM = true;
-    }
-  ];
+    };
+  };
 
   boot.initrd.mdadmConf = ''
     DEVICE /dev/sda1 /dev/sdb1
