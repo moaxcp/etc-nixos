@@ -17,12 +17,21 @@
     nssmdns = true;
   };
 
+  services.dockerRegistry = {
+    enable = true;
+    enableDelete = true;
+    enableGarbageCollect = true;
+  };
+
+  virtualisation.docker = {
+    enable = true;
+  };
+
   services.ntp.enable = true;
 
   services.xserver = {
     enable = true;
     layout = "us";
-    synaptics.enable = true;
     displayManager.lightdm = {
       enable = true;
     };
