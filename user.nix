@@ -17,9 +17,7 @@
     };
   in {
     nixpkgs.overlays = [
-      (self : super: {
-        micronaut-1_3_4 = nur.repos.moaxcp.micronaut-1_3_4;
-      })
+      nur.repos.moaxcp.overlays.use-moaxcp-nur-packages
       nur.repos.moaxcp.overlays.use-adoptopenjdk11 
     ];
     nixpkgs.config.allowUnfree = true;
@@ -43,6 +41,7 @@
       groovy
       jbake
       jdk
+      unstable.jetbrains.clion
       unstable.jetbrains.idea-community
       jetbrains.pycharm-community
       libdvdcss
@@ -60,6 +59,7 @@
       networkmanagerapplet
       unstable.niv
       obs-studio
+      pdfmod
       python3
       python37Packages.pip
       python35Packages.youtube-dl
