@@ -1,34 +1,25 @@
 {config, pkgs, ...}:
 {
-  nixpkgs.config = {
-    allowUnfree = true;
-    packageOverrides = pkgs: {
-      unstable = import <nixos-unstable> {
-        config = config.nixpkgs.config;
-      };
-      nur = import <nur> {
-        inherit pkgs;
-      };
-    };
-  };
-
+  nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
     borgbackup
+    file
     glxinfo
     git
+    google-chrome
     htop
     jdk
     lsof
+    minecraft
     nixops
     nox
+    pavucontrol
     psmisc
     screen
     tree
-    unetbootin
     unzip
     usbutils
     utillinux
-    #vim config
     (pkgs.callPackage ./vim.nix {})
     zip
   ];

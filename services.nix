@@ -1,51 +1,34 @@
 {pkgs, ...}:
+
 {
-  # List services that you want to enable:
+  services = {
+    blueman.enable = true;
+    openssh.enable = true;
+    printing.enable = true;
+    printing.drivers = [ pkgs.epson-escpr2 ];
+    thermald.enable = true;
+    #ntp.enable = true;
 
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-  services.openssh.permitRootLogin = "yes";
-
-  # Enable CUPS to print documents.
-  services.printing = {
-    enable = true;
-    drivers = [ pkgs.epson-escpr ];
-  };
-
-  services.avahi = {
-    enable = true;
-    nssmdns = true;
-  };
-
-  services.dockerRegistry = {
-    enable = true;
-    enableDelete = true;
-    enableGarbageCollect = true;
-  };
-
-  virtualisation.docker = {
-    enable = true;
-  };
-
-  services.ntp.enable = true;
-
-  services.xserver = {
-    enable = true;
-    layout = "us";
-    displayManager.lightdm = {
+    xserver = {
       enable = true;
+      layout = "us";
+      libinput.enable = true;
+      displayManager.sddm.enable = true;
+      desktopManager.xfce = {
+        enable = true;
+        thunarPlugins = [
+          pkgs.xfce.thunar-archive-plugin
+          pkgs.xfce.thunar-dropbox-plugin
+          pkgs.xfce.thunar-volman
+        ];
+      };
     };
-    displayManager.sessionCommands = ''
-      #${pkgs.stalonetray}/bin/stalonetray --parent-bg --kludges force_icons_size -i 24 &
-      ${pkgs.networkmanagerapplet}/bin/nm-applet &
-      ${pkgs.dropbox-cli}/bin/dropbox start &
-    '';
-    #windowManager.notion.enable = true;
-    desktopManager.xfce = {
+    picom = {
       enable = true;
-      #enableXfwm = false;
-      #noDesktop = true;
-      thunarPlugins = [ pkgs.xfce.thunar-archive-plugin ];
+      fade = true;
+      inactiveOpacity = 0.9;
+      shadow = true;
+      fadeDelta = 4;
     };
   };
 }

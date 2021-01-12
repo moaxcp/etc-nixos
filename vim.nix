@@ -5,12 +5,10 @@ vim_configurable.customize {
   vimrcConfig.customRC = ''
     set number
     set colorcolumn=80
-
     set tabstop=4
     set shiftwidth=4
     set softtabstop=4
     set expandtab
-
     set bs=2
   '';
 }
